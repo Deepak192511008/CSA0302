@@ -1,103 +1,32 @@
 START
 
-Declare stack[100]
+Read infix expression
 Set top = -1
 
-Define PRIORITY(ch)
+FOR/WHILE each character:
 
-    IF ch = '^'
-        RETURN 3
+    IF operand
+        Add to postfix
 
-    ELSE IF ch = '*' OR ch = '/'
-        RETURN 2
+    ELSE IF '('
+        PUSH
 
-    ELSE IF ch = '+' OR ch = '-'
-        RETURN 1
+    ELSE IF ')'
+        POP until '('
+        Remove '('
 
-    ELSE
-        RETURN 0
+    ELSE operator
+        WHILE stack top has higher/equal priority
+            POP and add to postfix
+        PUSH operator
 
-END PRIORITY
-
-
-Define PUSH(ch)
-
-    Increment top
-    stack[top] = ch
-
-END PUSH
-
-
-Define POP()
-
-    Store stack[top] in ch
-    Decrement top
-    RETURN ch
-
-END POP
-
-
-Read infix expression
-Set i = 0
-Set j = 0
-
-WHILE infix[i] is not NULL
-
-    Set ch = infix[i]
-
-    IF ch is an operand
-
-        postfix[j] = ch
-        Increment j
-
-    ELSE IF ch = '('
-
-        PUSH(ch)
-
-    ELSE IF ch = ')'
-
-        WHILE top is not -1 AND stack[top] is not '('
-
-            postfix[j] = POP()
-            Increment j
-
-        END WHILE
-
-        IF top is not -1
-
-            POP()        // Remove '('
-
-        END IF
-
-    ELSE
-
-        WHILE top is not -1
-              AND stack[top] is not '('
-              AND PRIORITY(stack[top]) >= PRIORITY(ch)
-
-            postfix[j] = POP()
-            Increment j
-
-        END WHILE
-
-        PUSH(ch)
-
-    END IF
-
-    Increment i
+    Move to next character
 
 END WHILE
 
+POP all remaining operators
+Add NULL to postfix
 
-WHILE top is not -1
-
-    postfix[j] = POP()
-    Increment j
-
-END WHILE
-
-Add NULL character at the end of postfix
-
-Display postfix expression
+Display postfix
 
 STOP
