@@ -1,0 +1,58 @@
+START
+
+Define Node with:
+    data
+    next
+
+Set head = NULL
+
+REPEAT
+
+    Display menu:
+        1. Insert
+        2. Delete
+        3. Display
+        4. Exit
+
+    Read choice
+
+    IF choice = 1
+
+        Create a new node
+        Read data
+        Store data in node
+        Set node->next = NULL
+
+        IF head == NULL
+            head = new node
+        ELSE
+            Traverse to last node
+            Connect last node to new node
+        END IF
+
+    ELSE IF choice = 2
+
+        IF head == NULL
+            Print "List is empty"
+        ELSE
+            Remove first node
+            Move head to next node
+        END IF
+
+    ELSE IF choice = 3
+
+        Start from head
+        Traverse until NULL
+        Print each node's data
+
+    ELSE IF choice = 4
+
+        STOP
+
+    ELSE
+
+        Print "Invalid choice"
+
+UNTIL choice = 4
+
+END
