@@ -5,7 +5,7 @@ int main()
 {
     char s[100], r[100];
 
-    scanf("%s", s);
+    scanf("%99s", s);
 
     strcpy(r, s);
     strrev(r);
